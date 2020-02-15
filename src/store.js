@@ -3,7 +3,7 @@ import rootReducer from '../src/reducers/rootReducer'
 
 const configureStore = () => {
     const initialState = {
-        countOfQuestion: 0,
+        countOfQuestion: 1,
         question: '',
         correct_ans: '',
         incorrect_ans: '',

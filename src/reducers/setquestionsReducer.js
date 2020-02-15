@@ -7,9 +7,8 @@ const setquestionsReducer = (state, action) => {
             return Object.assign({}, state, {started: action.payload} )
 
         case 'FETCHED_ALL_QUESTIONS':
-            return Object.assign({}, state, {allquestions: action.payload.questions,
-                alloptions: action.payload.options, 
-                totalquestions: action.payload.questions.length,
+            return Object.assign({}, state, {allquestions: action.payload.questions, 
+                totalquestions: action.payload.totalquestions,
                 started: action.payload.start })
             
         default: return state

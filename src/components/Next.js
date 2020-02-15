@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
         nextQuestionHandler: (event) => {
             console.log("next question handler");
             dispatch(nextQuestionAction())
+            
             }
     }
 }

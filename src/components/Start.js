@@ -31,11 +31,13 @@ const mapDispatchToProps = (dispatch) => {
             getQuizQuestions().then(
                 (allquestions) => {
                     console.log("API call success");
-                    let options = shuffle(allquestions.incorrect_ans.push(allquestions.correct_ans))
-                    dispatch(fetchedAllQuestionsAction(allquestions, options, allquestions.length, start))
+                    dispatch(fetchedAllQuestionsAction(allquestions, allquestions.length, start))
                 }
             )}
     }
 }
 
 export default connect(null, mapDispatchToProps)(Start)
+
+
+

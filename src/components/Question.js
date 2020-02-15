@@ -9,7 +9,7 @@ import configureStore from '../store'
 const Question = (props) => {
     return (
         <div>
-            {props.isQuizOn && props.count<props.totalQuestions
+            {props.isQuizOn && props.count<=props.totalQuestions
             ?  
             <div><h1>Your Question Goes Here ...</h1>
                 <h1>{props.allQuestionsForQuiz[props.count].question}</h1>
@@ -21,7 +21,7 @@ const Question = (props) => {
             : 
             <div><Start /></div>
             }
-            {(props.count+1 === props.totalQuestions) && <div>
+            {(props.count-1 === props.totalQuestions) && <div>
             <h2>You Answered {props.correctanswers} Correct Answers and {10-props.correctanswers} Answers </h2>
             <h2>Your Grade: {props.correctanswers*100/10} %age </h2></div>}
         </div>
