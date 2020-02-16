@@ -1,5 +1,13 @@
-
-const quizReducer = (state, action) => {
+const quizReducer = (state = {
+    countOfQuestion: 1,  //yes
+    // correct_ans: '',
+    // incorrect_ans: '',
+    // allchoices: '',
+    userchoice: '',  //yes
+    usercorrect: 0,  //yes
+    // score: 0,
+    alloptions: [],  //yes
+}, action) => {
     switch(action.type) {
         case 'SET_OPTIONS':
             return Object.assign({}, state, {correct_ans: action.payload.correct, 

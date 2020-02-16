@@ -30,8 +30,9 @@ const mapDispatchToProps = (dispatch) => {
             console.log("dispatched to action for API call")
             getQuizQuestions().then(
                 (allquestions) => {
-                    console.log("API call success");
-                    dispatch(fetchedAllQuestionsAction(allquestions, allquestions.length, start))
+                    console.log("API call success : ", allquestions);
+                    let total = allquestions.length;
+                    return dispatch(fetchedAllQuestionsAction(allquestions, total, start))
                 }
             )}
     }

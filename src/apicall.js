@@ -5,6 +5,7 @@ export const getQuizQuestions = () => {
     return httpService("GET", targetURL, null).then(
         (response) => {
             console.log(response.data.results);
+            return response.data.results;
         })
 }
 

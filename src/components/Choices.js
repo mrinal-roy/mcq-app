@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { InputGroup, Alert } from 'react-bootstrap';
-import {setOptionsAction, shuffleChoiceActions, captureUserAction} from '../actions/quizAction'
+import {setOptionsAction, shuffleChoiceActions, captureUserAction, userAnswerCheckAction} from '../actions/quizAction'
 import {connect} from 'react-redux';
 import shuffle from '../shuffle';
 
@@ -43,10 +43,10 @@ const mapDispatchToProps = (dispatch) => {
             },
         userSelectionHandler: (props) => {
             console.log("user selection made");
-            dispatch(captureUserAction(props.alloptions[props.user_answer_key-1]))
-            let new_score = (props.alloptions[props.user_answer_key-1] === props.correct) ? props.usercorrect+1 : props.usercorrect
-            console.log("user score or no score")
-            dispatch(userAnswerCheckAction(new_score))
+            dispatch(captureUserAction(props.alloptions[props.user_answer_key-1]));
+            let new_score = (props.alloptions[props.user_answer_key-1] === props.correct) ? props.usercorrect+1 : props.usercorrect;
+            console.log("user score or no score");
+            dispatch(userAnswerCheckAction((props.alloptions[props.user_answer_key-1] === props.correct) ? props.usercorrect+1 : props.usercorrect));
             }
         }
     }
