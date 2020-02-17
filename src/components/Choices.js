@@ -1,20 +1,47 @@
 import React, {Component} from 'react'
 import { InputGroup, Alert } from 'react-bootstrap';
-import {setOptionsAction, shuffleChoiceActions, captureUserAction, userAnswerCheckAction} from '../actions/quizAction'
+import {setOptionsAction, setShuffledOptions, captureUserAction, userAnswerCheckAction} from '../actions/quizAction'
 import {connect} from 'react-redux';
 import shuffle from '../shuffle';
 
 const Choices = (props) => {
+    let array1 = props.incorrect
+    let item = props.correct
+    console.log(array1.push(item))
+    console.log(array1)
+
+    function shuffle(input_array) {
+        let ctr = input_array.length;
+        let temp;
+        let index;
+        // While there are elements in the array
+        while (ctr > 0) {
+    // Pick a random index
+            index = Math.floor(Math.random() * ctr);
+    // Decrease ctr by 1
+            ctr--;
+    // And swap the last element with it
+            temp = input_array[ctr];
+            input_array[ctr] = input_array[index];
+            input_array[index] = temp;
+        }
+        return input_array;
+    }
+
+    let options = shuffle(array1)
+    console.log(options)
     return (
         <div>
-            {props.allquestions ?
-                props.allquestions.map((eachOption, key) => {
+            {
+            options ?
+                options.map((eachOption, key) => {
                     return (<InputGroup className="mb-3">
                         <InputGroup.Checkbox
                             aria-label="Checkbox for following text input"
-                            checked={false}
-                            onChange={props.userSelectionHandler}
-                            user_answer_key={key + 1} />
+                            checked={props.userSelectionHandler}
+                            onChange={props.userSelectionHandler(eachOption, props)}
+                            user_answer_key={key}
+                             />
                         <Alert variant="secondary">{eachOption}</Alert>
                     </InputGroup>)
                 }) : null}
@@ -36,17 +63,15 @@ const mapDispatchToProps = (dispatch) => {
         arrangeChoicesHandler: (props) => {
             console.log("arrange choices");
             dispatch(setOptionsAction(props.correct, props.incorrect))
-            let temp_options = props.incorrect.push(props.correct)
-            let options = shuffle(temp_options)
-            dispatch(shuffleChoiceActions(options))
+            // dispatch(setShuffledOptions(options))
             console.log("shuffle correct and incorrect options")
             },
-        userSelectionHandler: (props) => {
+        userSelectionHandler: (eachOption, props) => {
             console.log("user selection made");
-            dispatch(captureUserAction(props.alloptions[props.user_answer_key-1]));
-            let new_score = (props.alloptions[props.user_answer_key-1] === props.correct) ? props.usercorrect+1 : props.usercorrect;
+            dispatch(captureUserAction(eachOption));
+            let new_score = (eachOption === props.correct) ? props.usercorrect+1 : props.usercorrect;
             console.log("user score or no score");
-            dispatch(userAnswerCheckAction((props.alloptions[props.user_answer_key-1] === props.correct) ? props.usercorrect+1 : props.usercorrect));
+            dispatch(userAnswerCheckAction(new_score));
             }
         }
     }

@@ -1,19 +1,24 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import Choices from './Choices';
 import Next from './Next';
 import Start from './Start';
 import {connect} from 'react-redux';
+import {setCurrentQuestionAction} from '../actions/quizAction'
 import configureStore from '../store'
 
-
 const Question = (props) => {
+    // useEffect(() => {
+    //     props.dispatchQuestionHandler
+    // })
+
     return (
         <div>
             {props.isQuizOn && props.count<=props.totalQuestions
             ?  
             <div><h1>Your Question Goes Here ...</h1>
-                <h1>{props.allQuestionsForQuiz[props.count].question}</h1>
+                <h3>{props.allQuestionsForQuiz[props.count].question}</h3>
                 <Choices 
+                    current_question = {props.allQuestionsForQuiz[props.count].question}
                     correct={props.allQuestionsForQuiz[props.count].correct_answer} 
                     incorrect={props.allQuestionsForQuiz[props.count].incorrect_answers} 
                     />
@@ -39,5 +44,11 @@ const mapStateToProps = (state) => {
         correctanswers: state.quizReducer.usercorrect
     })
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//     dispatchQuestionHandler: (questionArg) => {
+//         dispatch(setCurrentQuestionAction(questionArg))
+//     } 
+// }
 
 export default connect(mapStateToProps)(Question)

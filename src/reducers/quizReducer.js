@@ -13,7 +13,10 @@ const quizReducer = (state = {
             return Object.assign({}, state, {correct_ans: action.payload.correct, 
                 incorrect_ans: action.payload.incorrect})
         
-        case 'SHUFFLE_OPTIONS':
+        case 'SET_CURRENT_QUESTION':
+            return Object.assign({}, state, {alloptions: action.payload.question_arg})
+        
+        case 'SET_SHUFFLED_OPTIONS':
             return Object.assign({}, state, {alloptions: action.payload.options_arg})
                 
         case 'CAPTURE_USER_ANSWER':

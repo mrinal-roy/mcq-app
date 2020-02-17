@@ -6,10 +6,18 @@ export const setOptionsAction = (correct_arg, incorrect_arg) => {
     }
 };
 
-export const shuffleChoiceActions = (options_arg) => {
-    console.log("SHUFFLE_OPTIONS")
+export const setCurrentQuestionAction = (question_arg) => {
+    console.log("SET_CURRENT_QUESTION")
     return {
-        type: "SHUFFLE_OPTIONS",
+        type: "SET_CURRENT_QUESTION",
+        payload: question_arg
+    }
+};
+
+export const setShuffledOptions = (options_arg) => {
+    console.log("SET_SHUFFLED_OPTIONS")
+    return {
+        type: "SET_SHUFFLED_OPTIONS",
         payload: options_arg
     }
 };
