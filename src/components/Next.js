@@ -4,13 +4,17 @@ import {connect} from 'react-redux';
 import {setOptionsAction, shuffleChoiceActions, captureUserAction, nextQuestionAction} from '../actions/quizAction'
 
 const Next = (props) => {
+
+    function nextQuestionHandler (event) {
+        event.preventDefault()
+        props.dispatchNextQuestioAction(props.count)
+    }
+
     return (
         <div>
             <ButtonToolbar>
                 <Button variant="primary"
-                        onClick={props.nextQuestionHandler}
-                
-                >Next</Button>
+                    onClick={nextQuestionHandler}>Next</Button>
             </ButtonToolbar>
         </div>
     )
@@ -18,12 +22,22 @@ const Next = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        nextQuestionHandler: (event) => {
-            console.log("next question handler");
-            dispatch(nextQuestionAction())
-            
+        dispatchNextQuestioAction: (old_count) => {
+            console.log("next question handler" , old_count);
+            dispatch(nextQuestionAction(++old_count))
             }
     }
 }
 
-export default connect(null, mapDispatchToProps)(Next)
+const mapStateToProps = (state) => {
+    console.log(
+        "Quiz is on: ", state.setquestionsReducer.started, 
+        "Questions: ", state.setquestionsReducer.allquestions, 
+        "Total Questions: ", state.setquestionsReducer.totalquestions,
+        "Count of Question:", state.quizReducer.countOfQuestion)
+    return({
+        count: state.quizReducer.countOfQuestion
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Next)

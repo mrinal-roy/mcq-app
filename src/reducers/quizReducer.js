@@ -1,12 +1,8 @@
 const quizReducer = (state = {
-    countOfQuestion: 1,  //yes
-    // correct_ans: '',
-    // incorrect_ans: '',
-    // allchoices: '',
-    userchoice: '',  //yes
-    usercorrect: 0,  //yes
-    // score: 0,
-    alloptions: [],  //yes
+    countOfQuestion: 1,
+    userchoice: '',
+    usercorrect: 0,
+    alloptions: [],
 }, action) => {
     switch(action.type) {
         case 'SET_OPTIONS':
@@ -15,18 +11,15 @@ const quizReducer = (state = {
         
         case 'SET_CURRENT_QUESTION':
             return Object.assign({}, state, {alloptions: action.payload.question_arg})
-        
-        case 'SET_SHUFFLED_OPTIONS':
-            return Object.assign({}, state, {alloptions: action.payload.options_arg})
+
+        case 'INCREASE_USER_SCORE':
+            return Object.assign({}, state, {usercorrect: ++action.payload})
                 
-        case 'CAPTURE_USER_ANSWER':
+        case 'CAPTURE_USER_ANSWER':  //not required
             return Object.assign({}, state, {userchoice: action.payload})
         
-        case 'CHECK_USER_ANSWER':
-            return Object.assign({}, state, {usercorrect: action.payload})
-        
         case 'NEXT_QUESTION_TRACK':
-            return Object.assign({}, state, {countOfQuestion: action.payload+1})
+            return Object.assign({}, state, {countOfQuestion: action.payload})
             
         default: return state
     }

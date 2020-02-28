@@ -16,17 +16,18 @@ const Question = (props) => {
             {props.isQuizOn && props.count<=props.totalQuestions
             ?  
             <div><h1>Your Question Goes Here ...</h1>
-                <h3>{props.allQuestionsForQuiz[props.count].question}</h3>
+                <h3>{props.allQuestionsForQuiz[props.count-1].question}</h3>
                 <Choices 
-                    current_question = {props.allQuestionsForQuiz[props.count].question}
-                    correct={props.allQuestionsForQuiz[props.count].correct_answer} 
-                    incorrect={props.allQuestionsForQuiz[props.count].incorrect_answers} 
+                    current_question = {props.allQuestionsForQuiz[props.count-1].question}
+                    correct={props.allQuestionsForQuiz[props.count-1].correct_answer}
+                    incorrect={props.allQuestionsForQuiz[props.count-1].incorrect_answers}
+                    answers = {props.allQuestionsForQuiz[props.count-1].all_answers}
                     />
                 <Next /></div>
             : 
             <div><Start /></div>
             }
-            {(props.count-1 === props.totalQuestions) && <div>
+            {(props.count === props.totalQuestions) && <div>
             <h2>You Answered {props.correctanswers} Correct Answers and {10-props.correctanswers} Answers </h2>
             <h2>Your Grade: {props.correctanswers*100/10} %age </h2></div>}
         </div>

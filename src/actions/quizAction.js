@@ -14,15 +14,23 @@ export const setCurrentQuestionAction = (question_arg) => {
     }
 };
 
-export const setShuffledOptions = (options_arg) => {
-    console.log("SET_SHUFFLED_OPTIONS")
-    return {
-        type: "SET_SHUFFLED_OPTIONS",
-        payload: options_arg
-    }
-};
+// export const setShuffledOptions = (options_arg) => {
+//     console.log("SET_SHUFFLED_OPTIONS")
+//     return {
+//         type: "SET_SHUFFLED_OPTIONS",
+//         payload: options_arg
+//     }
+// };
 
-export const captureUserAction = (selectedanswer) => {
+export const updateUserScoreAction = (old_score) => {
+    console.log("INCREASE_USER_SCORE");
+    return {
+        type: "INCREASE_USER_SCORE",
+        payload: old_score
+    }
+}
+
+export const captureUserAction = (selectedanswer) => {  //not required
     console.log("CAPTURE_USER_ANSWER")
     return {
         type: "CAPTURE_USER_ANSWER",
@@ -30,7 +38,7 @@ export const captureUserAction = (selectedanswer) => {
     }
 };
 
-export const userAnswerCheckAction = (updated_score) => {
+export const userAnswerCheckAction = (updated_score) => {   //not required
     console.log("CHECK_USER_ANSWER")
     return {
         type: "CHECK_USER_ANSWER",
@@ -38,11 +46,11 @@ export const userAnswerCheckAction = (updated_score) => {
     }
 }
 
-export const nextQuestionAction = () => {
+export const nextQuestionAction = (arg) => {
     console.log("NEXT_QUESTION_TRACK")   
     return {
         type: "NEXT_QUESTION_TRACK",
-        payload: 1
+        payload: arg
     }
 }
 

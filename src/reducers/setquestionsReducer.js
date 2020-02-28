@@ -1,9 +1,5 @@
 const setquestionsReducer = (state = {
     question: '',
-    // correct_ans: '',
-    // incorrect_ans: '',
-    // allchoices: '',
-    // score: 0,
     allquestions: [],  
     started: false,
     totalquestions: 0

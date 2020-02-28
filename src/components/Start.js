@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import {startQuizAction, fetchingAllQuestionsAction, fetchedAllQuestionsAction} from '../actions/startAction'
 import {getQuizQuestions} from '../apicall'
-import shuffle from '../shuffle'
 
 
 const Start = (props) => {
@@ -19,6 +18,24 @@ const Start = (props) => {
     )
 }
 
+function shuffle(input_array) {
+    let ctr = input_array.length;
+    let temp;
+    let index;
+    // While there are elements in the array
+    while (ctr > 0) {
+// Pick a random index
+        index = Math.floor(Math.random() * ctr);
+// Decrease ctr by 1
+        ctr--;
+// And swap the last element with it
+        temp = input_array[ctr];
+        input_array[ctr] = input_array[index];
+        input_array[index] = temp;
+    }
+    return input_array;
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         startQuizHandler: (event) => {
@@ -32,6 +49,14 @@ const mapDispatchToProps = (dispatch) => {
                 (allquestions) => {
                     console.log("API call success : ", allquestions);
                     let total = allquestions.length;
+                    allquestions.map((eachQuestion) => {
+                        let answer_options = eachQuestion.incorrect_answers
+                        answer_options.push(eachQuestion.correct_answer)
+                        let all_answers = shuffle(answer_options)
+                        Object.assign({}, eachQuestion, 
+                            {"all_answers": all_answers}
+                            )
+                    })
                     return dispatch(fetchedAllQuestionsAction(allquestions, total, start))
                 }
             )}
