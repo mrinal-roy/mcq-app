@@ -18,38 +18,28 @@ const Question = (props) => {
             <div><h1>Your Question Goes Here ...</h1>
                 <h3>{props.allQuestionsForQuiz[props.count-1].question}</h3>
                 <Choices 
-                    current_question = {props.allQuestionsForQuiz[props.count-1].question}
                     correct={props.allQuestionsForQuiz[props.count-1].correct_answer}
                     incorrect={props.allQuestionsForQuiz[props.count-1].incorrect_answers}
-                    answers = {props.allQuestionsForQuiz[props.count-1].all_answers}
                     />
                 <Next /></div>
             : 
             <div><Start /></div>
             }
-            {(props.count === props.totalQuestions) && <div>
-            <h2>You Answered {props.correctanswers} Correct Answers and {10-props.correctanswers} Answers </h2>
+            {(props.count-1 === props.totalQuestions && props.isQuizOn) && <div>
+            <h2>You Answered {props.correctanswers} Correct Answers and {10-props.correctanswers} Incorrect Answers </h2>
             <h2>Your Grade: {props.correctanswers*100/10} %age </h2></div>}
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
-    // console.log("Quiz is on: ", state.setquestionsReducer.started, "Questions: ", state.setquestionsReducer.allquestions, "Total Questions: ", state.setquestionsReducer.totalquestions)
     return({
         isQuizOn: state.setquestionsReducer.started,
         allQuestionsForQuiz: state.setquestionsReducer.allquestions,
         totalQuestions: state.setquestionsReducer.totalquestions,
-        userEntry: state.quizReducer.userchoice,
         count: state.quizReducer.countOfQuestion,
         correctanswers: state.quizReducer.usercorrect
     })
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     dispatchQuestionHandler: (questionArg) => {
-//         dispatch(setCurrentQuestionAction(questionArg))
-//     } 
-// }
 
 export default connect(mapStateToProps)(Question)

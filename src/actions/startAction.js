@@ -17,8 +17,6 @@ export const fetchedAllQuestionsAction = (questions_arg, totalquestions_arg, sta
     console.log("FETCHED_ALL_QUESTIONS")   
     return {
         type: 'FETCHED_ALL_QUESTIONS',
-        payload: {questions: questions_arg, totalquestions: totalquestions_arg, start:start_arg}
+        payload: {questions: questions_arg, totalquestions: totalquestions_arg, start: start_arg}
     }
 }
-
-

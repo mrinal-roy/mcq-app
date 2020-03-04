@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {setOptionsAction, shuffleChoiceActions, captureUserAction, nextQuestionAction} from '../actions/quizAction'
+import { nextQuestionAction } from '../actions/quizAction';
 
 const Next = (props) => {
 
